@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lidia Haratyk ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- OKŁADKA -->
   <section class="cover">
-    <div class="cover-tape cover-tape--top"></div>
     <div class="cover-inner">
       <div class="cover-corner cover-corner--tl"></div>
       <div class="cover-corner cover-corner--tr"></div>
       <div class="cover-corner cover-corner--bl"></div>
       <div class="cover-corner cover-corner--br"></div>
+
       <p class="cover-eyebrow">album wspomnień</p>
-      <h1 class="cover-title">Lidia<br>Haratyk</h1>
-      <p class="cover-subtitle">chwile, które zawsze będą nasze</p>
+      <h1 class="cover-name">Lidia Haratyk</h1>
+      <p class="cover-years">nasze wspólne chwile &nbsp;·&nbsp; 2023 – 2026</p>
       <div class="cover-divider"></div>
-      <p class="cover-years" id="coverYears"></p>
+
+      <p class="cover-message">
+        Przepraszam, że nie umiałem tego zmienić w sobie.<br>
+        Chciałbym być kimś, na kogo zawsze mogłaś liczyć.
+      </p>
     </div>
-    <div class="cover-scroll-hint">↓ przewiń</div>
+    <div class="cover-scroll">↓</div>
   </section>
 
-  <!-- INTRO -->
-  <section class="intro">
-    <div class="intro-inner">
-      <p class="intro-quote">"Niektóre chwile są zbyt piękne,<br>żeby istniały tylko w pamięci."</p>
+  <!-- LIST -->
+  <section class="letter">
+    <div class="letter-inner">
+      <p class="letter-text">
+        Po takim czasie mi dalej bardzo zależy na Tobie.
+        Mogłem się udać do kogoś wtedy, zamiast uciekać do złudnego bezpieczeństwa.
+      </p>
+      <p class="letter-text">
+        Brakuje mi wspólnych chwil, które spędzaliśmy.
+        Nie powinienem był tak tego zostawiać.
+      </p>
+      <p class="letter-sig">— dla Lidii</p>
     </div>
   </section>
 
@@ -41,9 +57,7 @@
       <h2 class="section-title">Nasze wspomnienia</h2>
       <div class="filter-bar" id="filterBar"></div>
     </div>
-    <div class="photo-grid" id="photoGrid">
-      <!-- generowane przez JS -->
-    </div>
+    <div class="photo-grid" id="photoGrid"></div>
   </section>
 
   <!-- LIGHTBOX -->
@@ -60,10 +74,11 @@
   <!-- STOPKA -->
   <footer class="site-footer">
     <div class="footer-heart">♡</div>
-    <p class="footer-text" id="footerText"></p>
+    <p class="footer-text">zawsze mi zależało, i nadal zależy</p>
   </footer>
 
   <script src="zdjecia.js"></script>
   <script src="main.js"></script>
 </body>
+
 </html>
