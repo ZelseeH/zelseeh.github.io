@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lidia Haratyk ♡</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
   <!-- OKŁADKA -->
@@ -72,13 +68,29 @@
   </div>
 
   <!-- STOPKA -->
+  <!-- ODTWARZACZ MUZYKI -->
+  <audio id="muzyka" loop preload="auto">
+    <source src="muzyka.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="player" id="player">
+    <button class="player-btn" id="playerBtn" aria-label="Odtwórz / Pauza">
+      <span id="playerIcon">♪</span>
+    </button>
+    <div class="player-info">
+      <span class="player-title" id="playerTitle">♩ wczytywanie…</span>
+      <div class="player-bar">
+        <div class="player-progress" id="playerProgress"></div>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="footer-heart">♡</div>
-    <p class="footer-text">zawsze mi zależało, i nadal zależy<br> Chciałbym takie strony robić częściej</p>
+    <p class="footer-text">zawsze mi zależało, i nadal zależy</p>
   </footer>
 
   <script src="zdjecia.js"></script>
   <script src="main.js"></script>
 </body>
-
 </html>

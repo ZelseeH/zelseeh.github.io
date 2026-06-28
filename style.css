@@ -395,3 +395,81 @@ body { font-family: var(--font-b); color: var(--ink); overflow-x: hidden; }
 @media (max-width: 380px) {
   .photo-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   ODTWARZACZ MUZYKI
+   ============================================================ */
+.player {
+  position: fixed;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: rgba(44, 30, 15, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 168, 130, 0.2);
+  border-radius: 50px;
+  padding: 0.55rem 1.2rem 0.55rem 0.6rem;
+  z-index: 500;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  transition: opacity 0.3s;
+}
+
+.player:hover { opacity: 1 !important; }
+
+.player-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(196,168,130,0.4);
+  background: rgba(196,168,130,0.12);
+  color: var(--cream);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.player-btn:hover { background: rgba(196,168,130,0.28); }
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 160px;
+  max-width: 240px;
+}
+
+.player-title {
+  font-family: var(--font-b);
+  font-weight: 300;
+  font-size: 0.72rem;
+  color: var(--brown-light);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-bar {
+  height: 2px;
+  background: rgba(196,168,130,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.player-progress {
+  height: 100%;
+  width: 0%;
+  background: var(--sepia);
+  border-radius: 2px;
+  transition: width 0.5s linear;
+}
+
+@media (max-width: 480px) {
+  .player { bottom: 0.8rem; padding: 0.45rem 0.9rem 0.45rem 0.5rem; }
+  .player-info { min-width: 120px; }
+}

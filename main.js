@@ -232,3 +232,87 @@
   });
 
 })();
+
+
+/* ============================================================
+   ODTWARZACZ MUZYKI
+   Odpala się przy pierwszym dotknięciu/kliknięciu strony.
+   ============================================================ */
+(function () {
+  const audio    = document.getElementById('muzyka');
+  const btn      = document.getElementById('playerBtn');
+  const icon     = document.getElementById('playerIcon');
+  const titleEl  = document.getElementById('playerTitle');
+  const progress = document.getElementById('playerProgress');
+  const player   = document.getElementById('player');
+
+  if (!audio || !btn) return;
+
+  // Nazwa piosenki z atrybutu data lub z nazwy pliku
+  const TYTUL = audio.dataset.title || 'muzyka.mp3';
+
+  let started = false;
+  let granie  = false;
+
+  function aktualizujIcon() {
+    icon.textContent = granie ? '⏸' : '♪';
+  }
+
+  function aktualizujPasek() {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = pct + '%';
+  }
+
+  function startMuzyki() {
+    if (started) return;
+    started = true;
+    audio.volume = 0.7;
+    audio.play().then(() => {
+      granie = true;
+      aktualizujIcon();
+      titleEl.textContent = '♩ ' + TYTUL;
+    }).catch(() => {
+      // zablokowane mimo kliknięcia – nic nie rób
+    });
+  }
+
+  // pierwsze kliknięcie / dotknięcie gdziekolwiek
+  function onFirstInteraction() {
+    startMuzyki();
+    document.removeEventListener('click',      onFirstInteraction);
+    document.removeEventListener('touchstart', onFirstInteraction);
+    document.removeEventListener('keydown',    onFirstInteraction);
+  }
+
+  document.addEventListener('click',      onFirstInteraction, { once: false });
+  document.addEventListener('touchstart', onFirstInteraction, { once: false, passive: true });
+  document.addEventListener('keydown',    onFirstInteraction, { once: false });
+
+  // przycisk pauzy/play
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation(); // nie triggeruje onFirstInteraction drugi raz
+    if (!started) { startMuzyki(); return; }
+    if (granie) {
+      audio.pause();
+      granie = false;
+    } else {
+      audio.play();
+      granie = true;
+    }
+    aktualizujIcon();
+  });
+
+  // pasek postępu
+  audio.addEventListener('timeupdate', aktualizujPasek);
+
+  // po załadowaniu metadanych – pokaż tytuł
+  audio.addEventListener('loadedmetadata', () => {
+    titleEl.textContent = '♩ ' + TYTUL;
+  });
+
+  // lekkie przyciemnienie playera kiedy się nie dzieje nic
+  setTimeout(() => { player.style.opacity = '0.55'; }, 4000);
+  player.addEventListener('mouseenter', () => { player.style.opacity = '1'; });
+  player.addEventListener('mouseleave', () => { if (!granie) player.style.opacity = '0.55'; else player.style.opacity = '0.85'; });
+})();
