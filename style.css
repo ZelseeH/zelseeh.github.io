@@ -174,4 +174,7 @@ body.viewer-open header { display: none; }
 @media (max-width: 480px) {
   .trips-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; padding: 1rem; }
   .grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+
+  /* na telefonie nawigacja to swipe, strzałki tylko przeszkadzają */
+  .lb-prev, .lb-next { display: none; }
 }
