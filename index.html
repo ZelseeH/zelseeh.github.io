@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wyjazdy</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>wyjazdy</h1>
+  <p class="sub">zdjęcia z podróży</p>
+</header>
+
+<!-- LISTA BLOCZKÓW -->
+<div class="trips-grid" id="tripsGrid">
+  <!-- generowane przez JS na podstawie WYJAZDY w wyjazdy.js -->
+</div>
+
+<!-- WIDOK ZDJĘĆ Z WYBRANEGO WYJAZDU -->
+<div class="viewer" id="viewer">
+  <div class="viewer-header">
+    <button class="back-btn" id="backBtn">← wróć</button>
+    <div class="viewer-title">
+      <span id="viewerName"></span>
+      <span class="viewer-date" id="viewerDate"></span>
+    </div>
+  </div>
+  <div class="grid" id="viewerGrid"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <button class="lb-next" id="lbNext">›</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script src="wyjazdy.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

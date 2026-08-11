@@ -1,0 +1,177 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+}
+
+header {
+  padding: 2rem 1.5rem 1rem;
+  text-align: center;
+}
+h1 { font-size: 1.8rem; }
+.sub { color: #888; font-size: 0.9rem; margin-top: 0.3rem; }
+
+/* ============================================================
+   BLOCZKI WYJAZDÓW
+   ============================================================ */
+.trips-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.trip-tile {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.trip-tile:hover {
+  transform: translateY(-3px);
+  border-color: #4ade80;
+}
+
+.trip-tile img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+  background: #222;
+}
+
+.trip-tile-body {
+  padding: 0.8rem 1rem;
+}
+
+.trip-tile-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.trip-tile-date {
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 0.15rem;
+}
+
+.trip-tile-count {
+  color: #4ade80;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+/* ============================================================
+   WIDOK ZDJĘĆ Z WYJAZDU
+   ============================================================ */
+.viewer {
+  display: none;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.viewer.open { display: block; }
+
+/* gdy widok jest otwarty, ukryj bloczki */
+body.viewer-open .trips-grid { display: none; }
+body.viewer-open header { display: none; }
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #eee;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.back-btn:hover { border-color: #4ade80; }
+
+.viewer-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+.viewer-title span:first-child {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.viewer-date {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  background: #222;
+  transition: opacity 0.15s;
+}
+.grid img:hover { opacity: 0.85; }
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lb {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.lb.open { display: flex; }
+
+.lb img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+.lb-close, .lb-prev, .lb-next {
+  position: fixed;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+.lb-close { top: 1rem; right: 1rem; font-size: 1.5rem; }
+.lb-prev  { left: 0.5rem; top: 50%; transform: translateY(-50%); }
+.lb-next  { right: 0.5rem; top: 50%; transform: translateY(-50%); }
+
+/* ============================================================
+   RESPONSYWNOŚĆ
+   ============================================================ */
+@media (max-width: 480px) {
+  .trips-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; padding: 1rem; }
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+}
