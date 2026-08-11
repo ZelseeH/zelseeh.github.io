@@ -42,7 +42,7 @@ except ImportError:
     print("Brak biblioteki Pillow. Zainstaluj: pip install pillow")
     raise SystemExit(1)
 
-SRC_DIR   = Path("surowe")      # tu wrzucasz foldery z oryginałami
+SRC_DIR   = Path(r"C:\Users\jkolodziej\Desktop\surowe")   # oryginały trzymane poza repo
 OUT_ZDJ   = Path("zdjecia")     # tu lądują przeskalowane wersje
 OUT_JS    = Path("wyjazdy.js")
 
