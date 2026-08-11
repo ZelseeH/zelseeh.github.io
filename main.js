@@ -13,6 +13,18 @@
   let lbList  = [];
   let lbIdx   = 0;
 
+  /* ============================================================
+     MINIATURKI
+     Zdjęcia z archive.org są pełnowymiarowe (10-17MB każde),
+     więc dla siatek generujemy mniejsze wersje przez darmowe
+     proxy wsrv.nl – pobiera oryginał raz, cache'uje, i serwuje
+     przeskalowaną wersję. Pełna jakość zostaje w lightboxie.
+     ============================================================ */
+  function thumbUrl(src, width) {
+    const encoded = encodeURIComponent(src);
+    return `https://wsrv.nl/?url=${encoded}&w=${width}&q=75&output=webp`;
+  }
+
   /* ── RENDER BLOCZKÓW ────────────────────────────────────── */
   function renderTiles() {
     tripsGrid.innerHTML = '';
@@ -27,7 +39,7 @@
       tile.className = 'trip-tile';
 
       const img = document.createElement('img');
-      img.src = wyjazd.zdjecia[0] || '';
+      img.src = thumbUrl(wyjazd.zdjecia[0] || '', 400);
       img.alt = wyjazd.nazwa;
       img.loading = 'lazy';
       tile.appendChild(img);
@@ -56,7 +68,7 @@
     viewerGrid.innerHTML = '';
     wyjazd.zdjecia.forEach((src, i) => {
       const img = document.createElement('img');
-      img.src = src;
+      img.src = thumbUrl(src, 260);       // mała, szybka miniaturka w siatce
       img.loading = 'lazy';
       img.addEventListener('click', () => openLightbox(wyjazd.zdjecia, i));
       viewerGrid.appendChild(img);
@@ -74,17 +86,22 @@
 
   backBtn.addEventListener('click', closeViewer);
 
-  /* ── LIGHTBOX ────────────────────────────────────────────── */
+  /* ── LIGHTBOX (pełna jakość) ─────────────────────────────── */
   function openLightbox(list, idx) {
     lbList = list;
     lbIdx  = idx;
-    lbImg.src = lbList[lbIdx];
+    setLightboxImage();
     lb.classList.add('open');
   }
 
+  function setLightboxImage() {
+    // średni rozmiar 1600px – ostre na ekranie, ale nie 17MB oryginał
+    lbImg.src = thumbUrl(lbList[lbIdx], 1600);
+  }
+
   function closeLightbox() { lb.classList.remove('open'); }
-  function nextPhoto() { lbIdx = (lbIdx + 1) % lbList.length; lbImg.src = lbList[lbIdx]; }
-  function prevPhoto() { lbIdx = (lbIdx - 1 + lbList.length) % lbList.length; lbImg.src = lbList[lbIdx]; }
+  function nextPhoto() { lbIdx = (lbIdx + 1) % lbList.length; setLightboxImage(); }
+  function prevPhoto() { lbIdx = (lbIdx - 1 + lbList.length) % lbList.length; setLightboxImage(); }
 
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   document.getElementById('lbNext').addEventListener('click', nextPhoto);
