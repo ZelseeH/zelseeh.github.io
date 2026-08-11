@@ -1,0 +1,7 @@
+# oryginalne zdjęcia przed przeskalowaniem – nie wrzucamy na GitHub
+surowe/
+
+# pliki systemowe
+.DS_Store
+Thumbs.db
+desktop.ini

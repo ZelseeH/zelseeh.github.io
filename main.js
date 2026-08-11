@@ -13,24 +13,12 @@
   let lbList  = [];
   let lbIdx   = 0;
 
-  /* ============================================================
-     MINIATURKI
-     Zdjęcia z archive.org są pełnowymiarowe (10-17MB każde),
-     więc dla siatek generujemy mniejsze wersje przez darmowe
-     proxy wsrv.nl – pobiera oryginał raz, cache'uje, i serwuje
-     przeskalowaną wersję. Pełna jakość zostaje w lightboxie.
-     ============================================================ */
-  function thumbUrl(src, width) {
-    const encoded = encodeURIComponent(src);
-    return `https://wsrv.nl/?url=${encoded}&w=${width}&q=75&output=webp`;
-  }
-
   /* ── RENDER BLOCZKÓW ────────────────────────────────────── */
   function renderTiles() {
     tripsGrid.innerHTML = '';
 
     if (!WYJAZDY.length) {
-      tripsGrid.innerHTML = '<p style="color:#888">Brak wyjazdów – dodaj je w wyjazdy.js</p>';
+      tripsGrid.innerHTML = '<p style="color:#888">Brak wyjazdów – uruchom generuj_galerie.py</p>';
       return;
     }
 
@@ -39,7 +27,7 @@
       tile.className = 'trip-tile';
 
       const img = document.createElement('img');
-      img.src = thumbUrl(wyjazd.zdjecia[0] || '', 400);
+      img.src = (wyjazd.zdjecia[0] && wyjazd.zdjecia[0].thumb) || '';
       img.alt = wyjazd.nazwa;
       img.loading = 'lazy';
       tile.appendChild(img);
@@ -66,9 +54,9 @@
     viewerDate.textContent = wyjazd.data;
 
     viewerGrid.innerHTML = '';
-    wyjazd.zdjecia.forEach((src, i) => {
+    wyjazd.zdjecia.forEach((zdj, i) => {
       const img = document.createElement('img');
-      img.src = thumbUrl(src, 260);       // mała, szybka miniaturka w siatce
+      img.src = zdj.thumb;          // mała, szybka miniaturka w siatce
       img.loading = 'lazy';
       img.addEventListener('click', () => openLightbox(wyjazd.zdjecia, i));
       viewerGrid.appendChild(img);
@@ -86,7 +74,7 @@
 
   backBtn.addEventListener('click', closeViewer);
 
-  /* ── LIGHTBOX (pełna jakość) ─────────────────────────────── */
+  /* ── LIGHTBOX (wersja "full" – ok. 1600px) ───────────────── */
   function openLightbox(list, idx) {
     lbList = list;
     lbIdx  = idx;
@@ -95,8 +83,7 @@
   }
 
   function setLightboxImage() {
-    // średni rozmiar 1600px – ostre na ekranie, ale nie 17MB oryginał
-    lbImg.src = thumbUrl(lbList[lbIdx], 1600);
+    lbImg.src = lbList[lbIdx].full;
   }
 
   function closeLightbox() { lb.classList.remove('open'); }
